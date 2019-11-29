@@ -7,4 +7,5 @@ public class Citizen extends Person {
         super.id += iterator;
         iterator += 2;
     }
+
 }
