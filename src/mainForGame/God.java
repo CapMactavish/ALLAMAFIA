@@ -1,7 +1,6 @@
 package mainForGame;
 
 import roles.*;
-//int t = (int) Math.random();
 
 public class God {
 	public boolean dayOrNight = true;
@@ -25,20 +24,18 @@ public class God {
 				} else if (!Dc) {
 					gamers[temp] = new Doctor();
 					Dc = true;
-				}
-				else if (!Nt) {
+				} else if (!Nt) {
 					gamers[temp] = new Natasha();
 					Nt = true;
-				}
-				else if(!Gf) {
+				} else if (!Gf) {
 					gamers[temp] = new GodFather();
 					Gf = true;
 				}
-				a1 -=2;
-				a2 -=2;
+			a1 -= 2;
+			a2 -= 2;
 		}
 		for (int i = 0; i < gamers.length; i++) {
-			while(a1>=0) {
+			while (a1 >= 0) {
 				temp = ((int) Math.random()) % 20;
 				if (gamers[temp] != null) {
 					gamers[temp] = new Mafia();
@@ -47,7 +44,7 @@ public class God {
 			}
 		}
 		for (int i = 0; i < gamers.length; i++) {
-			while(a2>=0) {
+			while (a2 >= 0) {
 				temp = ((int) Math.random()) % 20;
 				if (gamers[temp] != null) {
 					gamers[temp] = new Mafia();
