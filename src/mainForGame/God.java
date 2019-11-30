@@ -15,18 +15,25 @@ public class God {
 		a1 = (int) a / 3;
 		a2 = a - a1;
 		int[] temp = new int[8];
+		boolean[] choises = new boolean[21];
 		for (int i = 0; i < temp.length; i++) {
-			if (i == 0)
-				temp[i] = ((int) Math.random()) % 20;
-			else {
+			if (i == 0) {
+				temp[i] = (int) (Math.random() * 1000) % 20;
+				choises[temp[i]] = true;
+			} else {
 				while (true) {
-					if (temp[i] != temp[i - 1])
-						temp[i] = ((int) Math.random()) % 20;
-					break;
-
+					if (temp[i] != temp[i - 1] && choises[i] == false)
+						temp[i] = (int) (Math.random() * 1000) % 20;
+					{
+						choises[i] = true;
+						break;
+					}
 				}
 
 			}
+		}
+		for (int i = 0; i < temp.length; i++) {
+			System.out.print(temp[i] + "\t");
 		}
 
 		for (int i = 0; i < gamers.length; i++) {
@@ -41,7 +48,7 @@ public class God {
 
 		}
 		for (int i = 0; i < gamers.length; i++) {
-			if (gamers[i] != null)
+			if (gamers[i] == null)
 				gamers[i] = new Citizen();
 		}
 
