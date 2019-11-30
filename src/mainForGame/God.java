@@ -11,46 +11,38 @@ public class God {
 	}
 
 	public void setDuties(int a) {
-		int a1, a2, temp;
+		int a1, a2;
 		a1 = (int) a / 3;
 		a2 = a - a1;
-		boolean Dt = false, Dc = false, Nt = false, Gf = false;
-		for (int i = 0; i < 4; i++) {
-			temp = ((int) Math.random()) % 20;
-			if (gamers[temp] != null)
-				if (!Dt) {
-					gamers[temp] = new Detective();
-					Dt = true;
-				} else if (!Dc) {
-					gamers[temp] = new Doctor();
-					Dc = true;
-				} else if (!Nt) {
-					gamers[temp] = new Natasha();
-					Nt = true;
-				} else if (!Gf) {
-					gamers[temp] = new GodFather();
-					Gf = true;
+		int[] temp = new int[8];
+		for (int i = 0; i < temp.length; i++) {
+			if (i == 0)
+				temp[i] = ((int) Math.random()) % 20;
+			else {
+				while (true) {
+					if (temp[i] != temp[i - 1])
+						temp[i] = ((int) Math.random()) % 20;
+					break;
+
 				}
-			a1 -= 2;
-			a2 -= 2;
-		}
-		for (int i = 0; i < gamers.length; i++) {
-			while (a1 >= 0) {
-				temp = ((int) Math.random()) % 20;
-				if (gamers[temp] != null) {
-					gamers[temp] = new Mafia();
-					a1--;
-				}
+
 			}
 		}
+
 		for (int i = 0; i < gamers.length; i++) {
-			while (a2 >= 0) {
-				temp = ((int) Math.random()) % 20;
-				if (gamers[temp] != null) {
-					gamers[temp] = new Mafia();
-					a2--;
-				}
-			}
+			gamers[temp[0]] = new GodFather();
+			gamers[temp[1]] = new Natasha();
+			gamers[temp[2]] = new Doctor();
+			gamers[temp[3]] = new Detective();
+			gamers[temp[4]] = new Mafia();
+			gamers[temp[5]] = new Mafia();
+			gamers[temp[6]] = new Mafia();
+			gamers[temp[7]] = new Mafia();
+
+		}
+		for (int i = 0; i < gamers.length; i++) {
+			if (gamers[i] != null)
+				gamers[i] = new Citizen();
 		}
 
 	}
