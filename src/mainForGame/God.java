@@ -31,16 +31,30 @@ public class God {
 				
 			} else {
 				while (true) {
-					if (temp[j] != temp[j - 1] && choises[temp[j]] == false)
-						temp[j] = (int) (Math.random() * 1000) % 20;
+					temp[j] = (int) (Math.random() * 1000) % 20;
+					if (choises[temp[j]] == false)
 					{
 						choises[temp[j]] = true;
 						j++;
 						break;
 					}
+					
 				}
-
+				if (j == 8)
+					break;
 			}
+		}
+		gamers[temp[0]] = new GodFather();
+		gamers[temp[1]] = new Natasha();
+		gamers[temp[2]] = new Doctor();
+		gamers[temp[3]] = new Detective();
+		for (int k = 4; k < 8; k++) {
+			gamers[temp[k]] = new Mafia();
+			
+		}
+		for (int i = 0; i < gamers.length; i++) {
+			if (gamers[i] == null)
+				gamers[i] = new Citizen();
 		}
 
 	}
