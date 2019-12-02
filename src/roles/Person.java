@@ -10,5 +10,9 @@ public class Person {
     public void SetWakeOrAsleep() {
         this.wake = !wake;
     }
+    
+    public int getID() {
+		return this.id;
+	}
 
 }

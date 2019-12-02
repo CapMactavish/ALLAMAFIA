@@ -71,11 +71,22 @@ public class God {
 	}
 
 	public void wakeUpMifias() {
+		
 		for (int i = 0; i < gamers.length; i++) {
 			if (gamers[i] instanceof Mafia) {
 				System.out.println("Mafia bidar shodand!");
 				gamers[i].SetWakeOrAsleep();
 			}
 		}
+		
+		//--------------------------------------------
+		int[] IDs = new int[20];
+		for (int i = 0; i < IDs.length; i++) {
+			IDs[i] = gamers[i].getID();
+		}
+		for (int i = 0; i < IDs.length; i++) {
+			System.out.println((i+1)+"\t"+IDs[i]);
+		}
+		
 	}
 }
