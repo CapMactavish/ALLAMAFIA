@@ -15,7 +15,7 @@ public class God {
 	public God(int input) {
 		setDuties(input);
 	}
-
+	//
 	public void setDuties(int a) {
 		int a1, a2;
 		a1 = (int) a / 3;
