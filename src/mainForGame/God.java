@@ -77,22 +77,31 @@ public class God {
 			if (gamers[i] instanceof Mafia) {
 				gamers[i].SetWakeOrAsleep();
 			}
-			System.out.println("Mafia bidar shodand!");
 		}
+		System.out.println("Mafia bidar shodand!");
 
 		// --------------------------------------------
-		int[] IDs = new int[20];
+		ArrayList<Integer> IDs = new ArrayList<>();
 		ArrayList<Integer> election = new ArrayList<>();
-		for (int i = 0; i < IDs.length; i++) {
-			IDs[i] = gamers[i].getID();
+		for (int i = 0; i < gamers.length; i++) {
+			IDs.add(gamers[i].getID()) ;
 		}
 		for (int i = 0; i < gamers.length; i++) {
-			if (gamers[i] instanceof Mafia && IDs[i] != 0) {
+			if (gamers[i] instanceof Mafia && IDs.get(i) != 0) {
 				election.add(((Mafia) gamers[i]).choose(IDs));
 			}
 		}
+
 		for (Integer i : election) {
 			System.out.println(i);
+		}
+		for (int i = 0; i < gamers.length; i++) {
+			if (gamers[i] instanceof GodFather) {
+				((GodFather) gamers[i]).finalChoose(election);
+				IDs.remove(((GodFather) gamers[i]).finalChoose(election));
+				System.out.println("done");
+				
+			}
 		}
 
 	}

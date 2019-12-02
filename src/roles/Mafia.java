@@ -1,5 +1,7 @@
 package roles;
 
+import java.util.ArrayList;
+
 public class Mafia extends Person {
 	protected static int iterator = 2;
 
@@ -8,15 +10,15 @@ public class Mafia extends Person {
 		iterator += 2;
 	}
 	
-	public int choose(int[] a) {
+	public int choose(ArrayList<Integer> a) {
 		int t ;
 		while(true) {
 			t= (int) (Math.random() * 1000) % 20;
-			if (a[t] != 0) {
+			if (a.get(t) != 0) {
 				break;
 			}
 		}
-		return a[t];
+		return a.get(t);
 	}
 
 }
