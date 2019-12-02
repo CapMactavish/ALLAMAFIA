@@ -1,5 +1,7 @@
 package mainForGame;
 
+import java.util.ArrayList;
+
 import roles.Citizen;
 import roles.Detective;
 import roles.Doctor;
@@ -15,30 +17,29 @@ public class God {
 	public God(int input) {
 		setDuties(input);
 	}
+
 	//
 	public void setDuties(int a) {
-		int a1, a2;
+		int a1;
 		a1 = (int) a / 3;
-		a2 = a - a1;
 		int j = 0;
-		int[] temp = new int[8];
+		int[] temp = new int[a - a1];
 		boolean[] choises = new boolean[21];
-		while(true) {
+		while (true) {
 			if (j == 0) {
 				temp[j] = (int) (Math.random() * 1000) % 20;
 				choises[temp[j]] = true;
 				j++;
-				
+
 			} else {
 				while (true) {
 					temp[j] = (int) (Math.random() * 1000) % 20;
-					if (choises[temp[j]] == false)
-					{
+					if (choises[temp[j]] == false) {
 						choises[temp[j]] = true;
 						j++;
 						break;
 					}
-					
+
 				}
 				if (j == 8)
 					break;
@@ -50,7 +51,7 @@ public class God {
 		gamers[temp[3]] = new Detective();
 		for (int k = 4; k < 8; k++) {
 			gamers[temp[k]] = new Mafia();
-			
+
 		}
 		for (int i = 0; i < gamers.length; i++) {
 			if (gamers[i] == null)
@@ -71,22 +72,28 @@ public class God {
 	}
 
 	public void wakeUpMifias() {
-		
+
 		for (int i = 0; i < gamers.length; i++) {
 			if (gamers[i] instanceof Mafia) {
-				System.out.println("Mafia bidar shodand!");
 				gamers[i].SetWakeOrAsleep();
 			}
+			System.out.println("Mafia bidar shodand!");
 		}
-		
-		//--------------------------------------------
+
+		// --------------------------------------------
 		int[] IDs = new int[20];
+		ArrayList<Integer> election = new ArrayList<>();
 		for (int i = 0; i < IDs.length; i++) {
 			IDs[i] = gamers[i].getID();
 		}
-		for (int i = 0; i < IDs.length; i++) {
-			System.out.println((i+1)+"\t"+IDs[i]);
+		for (int i = 0; i < gamers.length; i++) {
+			if (gamers[i] instanceof Mafia && IDs[i] != 0) {
+				election.add(((Mafia) gamers[i]).choose(IDs));
+			}
 		}
-		
+		for (Integer i : election) {
+			System.out.println(i);
+		}
+
 	}
 }
