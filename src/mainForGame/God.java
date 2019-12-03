@@ -139,4 +139,21 @@ public class God {
 			}
 		}
 	}
+	
+	public int checkFinish() {
+		int iterM =0;
+		int iterC = 0;
+		for (int i = 0; i < IDs.size(); i++) {
+			if(IDs.get(i)%2==0)
+				iterM++;
+			else if (IDs.get(i)%2==1)
+				iterC++;
+		}
+		if(iterM == iterC)
+			return -1;
+		else if (iterM == 0)
+			return 0;
+		else
+			return 1;
+	}
 }
