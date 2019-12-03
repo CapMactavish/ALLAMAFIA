@@ -12,6 +12,7 @@ public class Doctor extends Citizen {
 	public boolean doctorOperation(ArrayList<Integer> a,int f) {
 		int temp = (int) (Math.random() * 1000) % (a.size());
 		if(f == a.get(temp)) {
+			System.out.println("find it");
 			return true;
 		}
 		return false;

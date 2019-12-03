@@ -90,7 +90,7 @@ public class God {
 		// --------------------------------------------
 		ArrayList<Integer> election = new ArrayList<>();
 		for (int i = 0; i < gamers.length; i++) {
-			if (gamers[i] instanceof Mafia && IDs.get(i) != 0) {
+			if (gamers[i] instanceof Mafia) {
 				election.add(((Mafia) gamers[i]).choose(IDs));
 			}
 		}

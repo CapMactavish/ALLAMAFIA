@@ -16,6 +16,7 @@ public class Main {
 				System.out.println("ct bord");
 				break;
 			}
+			System.out.println("\n\n");
 		}
 	}
 }
