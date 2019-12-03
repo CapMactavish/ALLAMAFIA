@@ -2,6 +2,8 @@ package mainForGame;
 
 import java.util.ArrayList;
 
+import javax.print.Doc;
+
 import roles.Citizen;
 import roles.Detective;
 import roles.Doctor;
@@ -13,6 +15,8 @@ import roles.Person;
 public class God {
 	public boolean dayOrNight = true;
 	Person[] gamers = new Person[20];
+	ArrayList<Integer> IDs = new ArrayList<>();
+	int choosenTodead;
 
 	public God(int input) {
 		setDuties(input);
@@ -23,7 +27,7 @@ public class God {
 		int a1;
 		a1 = (int) a / 3;
 		int j = 0;
-		int[] temp = new int[a - a1];
+		int[] temp = new int[8];
 		boolean[] choises = new boolean[21];
 		while (true) {
 			if (j == 0) {
@@ -69,10 +73,13 @@ public class God {
 				gamers[i].SetWakeOrAsleep();
 			}
 		}
+		for (int i = 0; i < gamers.length; i++) {
+			IDs.add(gamers[i].getID());
+		}
 	}
 
 	public void wakeUpMifias() {
-
+		int treatment = 0;
 		for (int i = 0; i < gamers.length; i++) {
 			if (gamers[i] instanceof Mafia) {
 				gamers[i].SetWakeOrAsleep();
@@ -81,11 +88,7 @@ public class God {
 		System.out.println("Mafia bidar shodand!");
 
 		// --------------------------------------------
-		ArrayList<Integer> IDs = new ArrayList<>();
 		ArrayList<Integer> election = new ArrayList<>();
-		for (int i = 0; i < gamers.length; i++) {
-			IDs.add(gamers[i].getID()) ;
-		}
 		for (int i = 0; i < gamers.length; i++) {
 			if (gamers[i] instanceof Mafia && IDs.get(i) != 0) {
 				election.add(((Mafia) gamers[i]).choose(IDs));
@@ -95,14 +98,31 @@ public class God {
 		for (Integer i : election) {
 			System.out.println(i);
 		}
+
 		for (int i = 0; i < gamers.length; i++) {
 			if (gamers[i] instanceof GodFather) {
-				((GodFather) gamers[i]).finalChoose(election);
-				IDs.remove(((GodFather) gamers[i]).finalChoose(election));
-				System.out.println("done");
-				
+				treatment = ((GodFather) gamers[i]).finalChoose(election);
+
 			}
 		}
+		choosenTodead = treatment;
+	}
 
+	public void doctorStuff() {
+		 outer: for (int i = 0; i < gamers.length; i++) {
+			if (gamers[i] instanceof Doctor) {
+				if (!((Doctor) gamers[i]).doctorOperation(IDs, choosenTodead)) {
+					for (int j = 0; j < IDs.size(); j++) {
+						if (IDs.get(j) == choosenTodead) {
+							IDs.remove(j);
+							System.err.println("taraf hazf shod");
+							break outer;
+						}
+					}
+				}
+				else if (i == gamers.length-1)
+					System.out.println("taraf nejat dadeh shod");
+			}
+		}
 	}
 }

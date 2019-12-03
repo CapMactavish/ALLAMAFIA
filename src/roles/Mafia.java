@@ -13,7 +13,7 @@ public class Mafia extends Person {
 	public int choose(ArrayList<Integer> a) {
 		int t ;
 		while(true) {
-			t= (int) (Math.random() * 1000) % 20;
+			t= (int) (Math.random() * 1000) % a.size();
 			if (a.get(t) != 0) {
 				break;
 			}
