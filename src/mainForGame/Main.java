@@ -4,8 +4,8 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("aloha");
 		God g = new God(20);
+		g.initiateTheGame();
 		while (true) {
-			g.initiateTheGame();
 			g.wakeUpMifias();
 			g.doctorStuff();
 			g.DetectiveCall();
@@ -16,7 +16,6 @@ public class Main {
 				System.out.println("ct bord");
 				break;
 			}
-
 		}
 	}
 }
