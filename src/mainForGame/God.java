@@ -109,7 +109,7 @@ public class God {
 	}
 
 	public void doctorStuff() {
-		 outer: for (int i = 0; i < gamers.length; i++) {
+		outer: for (int i = 0; i < gamers.length; i++) {
 			if (gamers[i] instanceof Doctor) {
 				if (!((Doctor) gamers[i]).doctorOperation(IDs, choosenTodead)) {
 					for (int j = 0; j < IDs.size(); j++) {
@@ -119,9 +119,23 @@ public class God {
 							break outer;
 						}
 					}
-				}
-				else if (i == gamers.length-1)
+				} else if (i == gamers.length - 1)
 					System.out.println("taraf nejat dadeh shod");
+			}
+		}
+	}
+
+	public void DetectiveCall() {
+		outer: for (int i = 0; i < gamers.length; i++) {
+			if (gamers[i] instanceof Detective) {
+				int t = ((Detective) gamers[i]).findMafia(IDs);
+				if (t != 0) {
+					System.err.println("this one is a mafia\t" + t);
+					break outer;
+				}
+			}
+			if (i == gamers.length - 1) {
+				System.out.println("couldnt get it");
 			}
 		}
 	}

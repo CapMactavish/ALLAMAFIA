@@ -7,6 +7,6 @@ public static void main(String[] args) {
 	g.initiateTheGame();
 	g.wakeUpMifias();
 	g.doctorStuff();
-	
+	g.DetectiveCall();
 }
 }
