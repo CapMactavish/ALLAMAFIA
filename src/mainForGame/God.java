@@ -24,22 +24,22 @@ public class God {
 
 	//
 	public void setDuties(int a) {
-		int a1;
-		a1 = (int) a / 3;
+		//int a1;
+		//a1 =  a / 3;
 		int j = 0;
 		int[] temp = new int[8];
-		boolean[] choises = new boolean[21];
+		boolean[] choices = new boolean[21];
 		while (true) {
 			if (j == 0) {
 				temp[j] = (int) (Math.random() * 1000) % 20;
-				choises[temp[j]] = true;
+				choices[temp[j]] = true;
 				j++;
 
 			} else {
 				while (true) {
 					temp[j] = (int) (Math.random() * 1000) % 20;
-					if (choises[temp[j]] == false) {
-						choises[temp[j]] = true;
+					if (!choices[temp[j]]) {
+						choices[temp[j]] = true;
 						j++;
 						break;
 					}
@@ -66,42 +66,42 @@ public class God {
 
 	public void initiateTheGame() {
 		System.out.println("Game is started!");
-		System.out.println("every one must sleep!!");
+		System.out.println("Every one Must sleep!!");
 		if (dayOrNight) {
 			dayOrNight = false;
-			for (int i = 0; i < gamers.length; i++) {
-				gamers[i].SetWakeOrAsleep();
-			}
+            for (Person gamer : gamers) {
+                gamer.SetWakeOrAsleep();
+            }
 		}
-		for (int i = 0; i < gamers.length; i++) {
-			IDs.add(gamers[i].getID());
-		}
+        for (Person gamer : gamers) {
+            IDs.add(gamer.getID());
+        }
 	}
 
-	public void wakeUpMifias() {
+	public void wakeUpMafias() {
 		int treatment = 0;
-		for (int i = 0; i < gamers.length; i++) {
-			if (gamers[i] instanceof Mafia) {
-				gamers[i].SetWakeOrAsleep();
+		for (Person gamer : gamers) {
+			if (gamer instanceof Mafia) {
+				gamer.SetWakeOrAsleep();
 			}
 		}
-		System.out.println("Mafia bidar shodand!");
+		System.out.println("Mafia have waken up !");
 
 		// --------------------------------------------
 		ArrayList<Integer> election = new ArrayList<>();
-		for (int i = 0; i < gamers.length; i++) {
-			if (gamers[i] instanceof Mafia) {
-				election.add(((Mafia) gamers[i]).choose(IDs));
+		for (Person gamer : gamers) {
+			if (gamer instanceof Mafia) {
+				election.add(((Mafia) gamer).choose(IDs));
 			}
 		}
 
 		for (Integer i : election) {
-			System.out.println(i);
+			System.out.println(i%100);
 		}
 
-		for (int i = 0; i < gamers.length; i++) {
-			if (gamers[i] instanceof GodFather) {
-				treatment = ((GodFather) gamers[i]).finalChoose(election);
+		for (Person gamer : gamers) {
+			if (gamer instanceof GodFather) {
+				treatment = ((GodFather) gamer).finalChoose(election);
 
 			}
 		}
@@ -115,38 +115,38 @@ public class God {
 					for (int j = 0; j < IDs.size(); j++) {
 						if (IDs.get(j) == choosenTodead) {
 							IDs.remove(j);
-							System.err.println("taraf hazf shod");
+							System.err.println("This person has Omitted! ");
 							break outer;
 						}
 					}
 				} else if (i == gamers.length - 1)
-					System.out.println("taraf nejat dadeh shod");
+					System.out.println("This person Survived! ");
 			}
 		}
 	}
 
 	public void DetectiveCall() {
-		outer: for (int i = 0; i < gamers.length; i++) {
+		 for (int i = 0; i < gamers.length; i++) {
 			if (gamers[i] instanceof Detective) {
 				int t = ((Detective) gamers[i]).findMafia(IDs);
 				if (t != 0) {
-					System.err.println("this one is a mafia\t" + t);
-					break outer;
+					System.err.println("This one is a mafia\t" + t%100);
+					break;
 				}
 			}
 			if (i == gamers.length - 1) {
-				System.out.println("couldnt get it");
+				System.out.println("Couldn't get it");
 			}
 		}
 	}
-	
+
 	public int checkFinish() {
 		int iterM =0;
 		int iterC = 0;
-		for (int i = 0; i < IDs.size(); i++) {
-			if(IDs.get(i)%2==0)
+		for (Integer id : IDs) {
+			if (id % 2 == 0)
 				iterM++;
-			else if (IDs.get(i)%2==1)
+			else if (id % 2 == 1)
 				iterC++;
 		}
 		if(iterM == iterC)

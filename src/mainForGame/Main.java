@@ -6,14 +6,14 @@ public class Main {
 		God g = new God(20);
 		g.initiateTheGame();
 		while (true) {
-			g.wakeUpMifias();
+			g.wakeUpMafias();
 			g.doctorStuff();
 			g.DetectiveCall();
 			if (g.checkFinish() == -1) {
-				System.out.println("mafia bord");
+				System.out.println("Mafia Win");
 				break;
 			} else if (g.checkFinish() == 0) {
-				System.out.println("ct bord");
+				System.out.println("Citizen win");
 				break;
 			}
 			System.out.println("\n\n");
